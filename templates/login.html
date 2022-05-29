@@ -1,0 +1,22 @@
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Enter Username"><br><br>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter Password"><br>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
+<button><a href="{%url 'registerPage'%}" style="text-decoration: none">SignUp</a></button>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
