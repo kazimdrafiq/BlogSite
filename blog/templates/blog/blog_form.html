@@ -1,0 +1,35 @@
+{% extends 'blog/main.html' %}
+
+{% block content %}
+    <h2>Create/Update Blog</h2>
+    <form method="POST" action="">
+    {% csrf_token %}
+        <div>
+            <label for="blog_categories">Enter a category: </label>
+{#            <input required type="text" value="" name="categories" list="category-list"> {#blog.category#}
+{#            <datalist id="category-list">#}
+                <select name="categories" id="blog_categories">
+                    {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+{#            </datalist>#}
+        </div>
+        <br>
+        <div>
+            <label for="">Blog Title: </label>
+            {{ form.title }}
+        </div>
+        <br>
+        <div>
+            <label for="">Blog Description: </label>
+            {{ form.description }}
+        </div>
+        <br>
+        <div>
+            <button type="submit">Submit</button>
+            <a href="{% url 'home' %}">Cancel</a>
+        </div>
+    </form>
+
+{% endblock %}

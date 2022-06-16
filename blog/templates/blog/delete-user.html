@@ -1,0 +1,14 @@
+{% extends 'blog/main.html' %}
+
+{% block content %}
+
+<h2>Delete Profile</h2>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <p>Are you sure you want delete profile named: '{{ object }}' ?</p>
+    <input type="submit" value="Confirm">
+    <a href="{% url 'profile' object.id %}">Go Back</a>
+</form>
+
+{% endblock%}

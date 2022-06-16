@@ -1,0 +1,49 @@
+{% extends 'blog/main.html' %}
+
+{% block content %}
+    <style>
+        .profile-pic {
+            display: inline-block;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+    </style>
+    <h3>User Profile Name: '{{ user.username }}'</h3>
+    <div class="profile-pic">
+        <img class="profile-pic" src="{{ user.avatar.url }}" alt=""> <span>{{ blog.author }}</span>
+    </div>
+    <br>
+    <a href="{% url 'home' %}">Go Back</a>
+    <hr>
+    {% if request.user == user %}
+        <a href="{% url 'update-user' %}">Update Profile</a>
+        <a href="{% url 'delete-user' user.id %}">Delete Profile</a>
+        <hr>
+    {% endif %}
+    <h2>Blogs posted by '{{ user.username }}'</h2>
+
+    {% for blog in blogs %}
+        <div>
+            <p><b>Posted:</b> <span>{{ blog.created_at }}</span> | <span>{{ blog.created_at|timesince }} ago</span></p>
+        </div>
+        <div>
+            <p><b>Title:</b> <span>{{ blog.title }}</span></p>
+        </div>
+        <div>
+            {{ blog.description }}
+        </div>
+        {#        <button type="submit" style="color: white; background-color: #334eff; border-color: #1300ff ">Like</button>#}
+        {#        <strong>{{ blog.likes.all.count }} liked this post.</strong>#}
+        <br>
+        {% if request.user == user %}
+            <a href="{% url 'update-blog' blog.id %}">Update Blog</a>
+            <a href="{% url 'delete-blog' blog.id %}">Delete Blog</a>
+        {% endif %}
+        <hr>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load static %}
+<h2>Browse Categories</h2>
+<h5>{{ blogs.count }} blogs available:</h5>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'home' %}">
+        Total: <span>{{ all_blogs_count }}</span>
+    </a>
+</li>
+{% for category in categories %}
+    <li>
+        <a href="{% url 'home' %}?q={{ category.name }}">
+            {{ category.name }}: <span>{{ category.blog_set.all.count }}</span>
+        </a>
+    </li>
+{% endfor %}
+

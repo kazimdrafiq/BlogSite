@@ -1,0 +1,46 @@
+<style>
+    .profile-pic {
+        display: inline-block;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+</style>
+{% for blog in blogs %}
+    <p>
+{#        <b>Author: </b>#}
+        <a href="{% url 'profile' blog.author.id %}">
+    <div>
+        <img class="profile-pic" src="{{ blog.author.avatar.url }}" alt=""> <span>{{ blog.author.username }}</span>
+    </div>
+    </a>
+    </p>
+    <div>
+        <p><b>Posted: </b> <span>{{ blog.created_at }}</span> | <span>{{ blog.created_at|timesince }} ago</span></p>
+    </div>
+    <div>
+        <p><b>Title: </b> <span>{{ blog.title }}</span></p>
+    </div>
+    <div>
+        {{ blog.description }}
+    </div>
+    <br>
+    <form method="POST" action="{% url 'like-view' blog.id %}">
+        {% csrf_token %}
+        {% if request.user in value.likes.all %}
+            <button type="submit" name="blog_id" value="blog_id"
+                    style="color: #f4eaff ;border-color: #ff202b; background-color: #ff6f66 ">Unlike
+            </button>
+        {% else %}
+            <button type="submit" name="blog_i" value="blog_id"
+                    style="color: white; background-color: #334eff; border-color: #1300ff ">Liked
+            </button>
+        {% endif %}
+    </form>
+    <strong>{{ blog.likes.all.count }} liked this post.</strong>
+    <hr>
+{% endfor %}

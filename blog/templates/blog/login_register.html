@@ -1,0 +1,30 @@
+{% extends 'blog/main.html' %}
+
+{% block content %}
+
+    {% if check == 'login' %}
+        <div>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <label>Email</label>
+                <input type="text" name="email" , placeholder="Enter Email">
+
+                <label>Password</label>
+                <input type="password" name="password" , placeholder="Enter password">
+                <hr>
+
+                <input type="submit" name="submit" value="login">
+            </form>
+        </div>
+        <p>Didn't register yet?<a href="{% url 'register' %}"> Register</a></p>
+    {% else %}
+        <div>
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" name="submit" , value="Register">
+            </form>
+        </div>
+        <P>Already Registered?<a href="{% url 'login' %}"> Login</a></P>
+    {% endif %}
+{% endblock %}

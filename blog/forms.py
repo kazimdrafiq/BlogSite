@@ -1,13 +1,19 @@
 from django.forms import ModelForm
-from .models import DataBlog
+from django.contrib.auth.forms import UserCreationForm
+from .models import *
 
-
-# class BloogForm(ModelForm):
-#     class Meta:
-#         fields='__all__'
-
-class ShowForm(ModelForm):
+class MyUserCreationForm(UserCreationForm):
     class Meta:
-        model = DataBlog
-        fields = '__all__'
+        model = User
+        fields = ['name', 'username', 'email', 'password1', 'password2']
 
+class BlogForm(ModelForm):
+    class Meta:
+        model = Blog
+        fields = '__all__'
+        exclude = ['host', 'reaction_count']
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['avatar', 'name', 'username', 'email', 'bio']

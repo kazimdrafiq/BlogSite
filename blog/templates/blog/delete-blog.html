@@ -1,0 +1,14 @@
+{% extends 'blog/main.html' %}
+
+{% block content %}
+
+<h2>Delete Blog</h2>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <p>Are you sure you want delete blog post titled: '{{ object }}' ?</p>
+    <input type="submit" value="Confirm">
+    <a href="{ request.META.HTTP_REFERER }">Go Back</a>
+</form>
+
+{% endblock%}
